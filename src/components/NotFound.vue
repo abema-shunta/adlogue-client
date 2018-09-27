@@ -1,8 +1,6 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <router-view/>
   </div>
 </template>
 
@@ -14,8 +12,7 @@ export default {
   name: 'Dashboard',
   data () {
     return {
-      msg: "広告主一覧",
-      buyers: []
+      msg: "404",
     }
   }
 }
