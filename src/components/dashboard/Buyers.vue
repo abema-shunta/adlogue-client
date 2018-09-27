@@ -1,11 +1,23 @@
 <template>
-  <div class="hello">
-    <ul> 
-      <li v-for="buyer in buyers" :key="buyer.id"> 
-        {{buyer.id}} : {{buyer.name}}
-      </li>
-    </ul>
-  </div>
+  <v-list>
+    <v-list-tile
+      v-for="buyer in buyers"
+      :key="buyer.id"
+      avatar
+      @click=""
+    >
+      <v-list-tile-action>
+        <v-icon v-if="buyer.state" color="pink">star</v-icon>
+      </v-list-tile-action>
+
+      <v-list-tile-content>
+        <v-list-tile-title v-text="buyer.name"></v-list-tile-title>
+      </v-list-tile-content>
+
+      <v-list-tile-avatar>
+      </v-list-tile-avatar>
+    </v-list-tile>
+  </v-list>
 </template>
 
 <script>
