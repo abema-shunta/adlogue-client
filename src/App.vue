@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <a href="/logout">ログアウト</a>
     <router-view/>
   </div>
 </template>

@@ -2,16 +2,36 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
+    <ul> 
+      <li v-for="buyer in buyers"> 
+        {{buyer.id}} : {{buyer.name}}
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
+
+import axios from 'axios'
+
 export default {
   name: 'Dashboard',
   data () {
     return {
-      msg: localStorage.token
+      msg: "広告主一覧",
+      buyers: []
     }
+  }, 
+  created () {
+    const self = this
+    let params = new URLSearchParams();
+    params.append('session', localStorage.token);
+    require('axios-debug')(axios);
+    axios
+      .post('https://ad.ec-concier.com/adlogue/user.json/buyer/select',params)
+      .then((res) => {
+        self.buyers = res.data.list.data
+      });
   }
 }
 </script>
@@ -33,4 +53,3 @@ a {
   color: #42b983;
 }
 </style>
-a

@@ -40,13 +40,12 @@ export default {
   }
   
   function request (username, pass, cb) {
-    require('axios-debug')(axios);
+    //require('axios-debug')(axios);
     let params = new URLSearchParams();
     params.append('login_id', username);
     params.append('password', pass);
-    axios.post('http://localhost:9999/https://ad.ec-concier.com/adlogue/user.json/login/auth',
+    axios.post('https://ad.ec-concier.com/adlogue/user.json/login/auth',
     params,{headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(function(response){
-        console.log(response);
         cb({
             authenticated: true,
             token: response.data.session

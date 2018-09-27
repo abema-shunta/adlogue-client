@@ -21,8 +21,8 @@ import auth from '@/auth'
 export default {
   data () {
     return {
-      username: 'admin_furukawa',
-      pass: 'jimbo1112',
+      username: '',
+      pass: '',
       error: false,
       msg: 'Login'
     }
