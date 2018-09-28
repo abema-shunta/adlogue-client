@@ -1,16 +1,55 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Login</h2>
-    <p v-if="$route.query.redirect">
+    <div v-if="$route.query.redirect"> 
+    <v-alert
+      :value="true"
+      color="red"
+      icon="warning"
+      outline
+    >
       You need to login first.
-    </p>
-    <form @submit.prevent="login">
-      <label><input v-model="username" placeholder="username"></label>
-      <label><input v-model="pass" placeholder="password" type="password"></label> (hint: password1)<br>
-      <button type="submit">login</button>
-      <p v-if="error" class="error">Bad login information</p>
-    </form>
+    </v-alert>
+    </div>
+    <v-layout fill-height justify-center align-center >
+      <div>
+      <v-layout justify-center row > 
+      <h1>{{ msg }}</h1>
+      </v-layout> 
+
+      <v-layout justify-center row> 
+      <v-card>
+      <v-container
+          fluid
+          grid-list-md
+        >
+      <v-form ref="form" v-model="valid" lazy-validation>
+        <v-text-field
+          v-model="username"
+          label="Username"
+          required
+        ></v-text-field>
+        <v-text-field
+            v-model="pass"
+            :append-icon="show ? 'visibility_off' : 'visibility'"
+            :type="show ? 'text' : 'password'"
+            name="input-10-1"
+            label="Password"
+            counter
+            @click:append="show = !show"
+          ></v-text-field>
+        <v-btn
+          :disabled="!valid"
+          @click="login"
+        >
+        submit
+        </v-btn>
+        <v-btn @click="clear">clear</v-btn>
+      </v-form>
+      </v-container>
+      </v-card>
+      </v-layout> 
+      </div>
+    </v-layout>
   </div>
 </template>
 
@@ -24,7 +63,9 @@ export default {
       username: '',
       pass: '',
       error: false,
-      msg: 'Login'
+      msg: 'ec-concier CDAP',
+      show: false,
+      valid: false
     }
   },
   methods: {
@@ -36,6 +77,9 @@ export default {
           this.$router.replace(this.$route.query.redirect || '/')
         }
       })
+    },
+    clear () {
+      this.$refs.form.reset()
     }
   }
 }
@@ -57,4 +101,5 @@ li {
 a {
   color: #42b983;
 }
+.hello {display: block; height: 100%}
 </style>

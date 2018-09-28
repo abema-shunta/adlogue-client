@@ -46,9 +46,13 @@ export default {
     params.append('password', pass);
     axios.post('https://ad.ec-concier.com/adlogue/user.json/login/auth',
     params,{headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(function(response){
-        cb({
+        if (response.data){
+          cb({
             authenticated: true,
             token: response.data.session
-        });
+          });
+        } else {
+          cb({authenticated: false})
+        }
     });
 }
